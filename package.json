@@ -1,0 +1,52 @@
+{
+  "name": "@origraph/twitter-import",
+  "version": "0.1.0",
+  "description": "Plugin to origraph.js for importing twitter data",
+  "main": "dist/origraphTwitterImport.cjs.js",
+  "module": "dist/origraphTwitterImport.esm.js",
+  "jsnext:main": "dist/origraphTwitterImport.esm.js",
+  "browser": "dist/origraphTwitterImport.umd.js",
+  "scripts": {
+    "build": "rollup -c --environment TARGET:all",
+    "watch": "rollup -c -w",
+    "watchcjs": "rollup -c -w --environment TARGET:cjs",
+    "watchumd": "rollup -c -w --environment TARGET:umd",
+    "watchesm": "rollup -c -w --environment TARGET:esm",
+    "test": "jest --runInBand",
+    "pretest": "rollup -c --environment TARGET:cjs",
+    "debug": "rollup -c --environment TARGET:cjs,SOURCEMAP:false && node --inspect-brk node_modules/.bin/jest --runInBand -t",
+    "coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/origraph/origraph-twitter-import.git"
+  },
+  "author": "Alex Bigelow",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/origraph/origraph-twitter-import/issues"
+  },
+  "homepage": "https://github.com/origraph/origraph-twitter-import#readme",
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "babel-core": "^7.0.0-0",
+    "babel-jest": "^23.6.0",
+    "coveralls": "^3.0.2",
+    "jest": "^23.6.0",
+    "rollup": "^0.66.3",
+    "rollup-plugin-babel": "^4.0.3",
+    "rollup-plugin-commonjs": "^9.1.8",
+    "rollup-plugin-json": "^3.1.0",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-node-globals": "^1.4.0",
+    "rollup-plugin-node-resolve": "^3.4.0",
+    "rollup-plugin-string": "^2.0.2"
+  },
+  "dependencies": {
+    "origraph": "^0.1.2-r1"
+  }
+}
