@@ -1,4 +1,7 @@
 # origraph-twitter-import
+[![Build Status](https://travis-ci.org/origraph/origraph-twitter-import.svg?branch=master)](https://travis-ci.org/origraph/origraph-twitter-import)
+[![Coverage Status](https://coveralls.io/repos/github/origraph/origraph-twitter-import/badge.svg?branch=master)](https://coveralls.io/github/origraph/origraph-twitter-import?branch=master)
+
 Plugin to origraph.js for importing twitter data
 
 # Installation and Usage
@@ -41,7 +44,7 @@ This is meant as a pretty simple template for writing other origraph data import
 - (Verify Travis CI doesn't fail)
 - `git tag -a #.#.# -m "tag annotation"`
 - `git push --tags`
-- `npm publish`
+- `npm publish --access public`
 - Edit / document the release on Github
 
 ## How people can use your published plugin
