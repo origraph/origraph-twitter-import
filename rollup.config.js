@@ -50,7 +50,7 @@ if (targets.cjs) {
 if (targets.umd) {
   // browser-friendly UMD build
   builds.push({
-    input: 'src/main.js',
+    input: 'src/browser.js',
     output: {
       name: pkg.name,
       file: pkg.browser,
