@@ -1,7 +1,7 @@
 import origraph from 'origraph';
 
 var name = "@origraph/twitter-import";
-var version = "0.1.0";
+var version = "0.1.1";
 var description = "Plugin to origraph.js for importing twitter data";
 var main = "dist/origraphTwitterImport.cjs.js";
 var module$1 = "dist/origraphTwitterImport.esm.js";
@@ -47,7 +47,7 @@ var devDependencies = {
 	"rollup-plugin-string": "^2.0.2"
 };
 var dependencies = {
-	origraph: "^0.1.2-r1"
+	origraph: "^0.1.3"
 };
 var pkg = {
 	name: name,
