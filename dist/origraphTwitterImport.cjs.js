@@ -2,6 +2,7 @@
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
+var Twitter = _interopDefault(require('twitter'));
 var origraph = _interopDefault(require('origraph'));
 
 var name = "@origraph/twitter-import";
@@ -36,6 +37,7 @@ var bugs = {
 var homepage = "https://github.com/origraph/origraph-twitter-import#readme";
 var devDependencies = {
 	"@babel/core": "^7.1.2",
+	"@babel/plugin-proposal-async-generator-functions": "^7.1.0",
 	"@babel/preset-env": "^7.1.0",
 	"babel-core": "^7.0.0-0",
 	"babel-jest": "^23.6.0",
@@ -51,7 +53,8 @@ var devDependencies = {
 	"rollup-plugin-string": "^2.0.2"
 };
 var dependencies = {
-	origraph: "^0.1.3"
+	origraph: "^0.1.3",
+	twitter: "^1.7.1"
 };
 var pkg = {
 	name: name,
@@ -77,6 +80,32 @@ class TwitterImporter {
     this.origraph = origraph$$1;
   }
 
+  async getStaticTable({
+    endpoint,
+    method,
+    params,
+    consumer_key,
+    // eslint-disable-line camelcase
+    consumer_secret,
+    // eslint-disable-line camelcase
+    access_token_key,
+    // eslint-disable-line camelcase
+    access_token_secret // eslint-disable-line camelcase
+
+  }) {
+    const client = new Twitter({
+      consumer_key,
+      consumer_secret,
+      access_token_key,
+      access_token_secret
+    });
+    const data = await client[method](endpoint, params);
+    return this.origraph.addStaticTable({
+      data,
+      name: `Twitter: ${endpoint}`
+    });
+  }
+
 }
 
 const twitterImporter = new TwitterImporter(origraph);
@@ -84,4 +113,4 @@ twitterImporter.version = pkg.version;
 origraph.registerPlugin('twitter-import', twitterImporter);
 
 module.exports = twitterImporter;
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoib3JpZ3JhcGhUd2l0dGVySW1wb3J0LmNqcy5qcyIsInNvdXJjZXMiOlsiLi4vc3JjL1R3aXR0ZXJJbXBvcnRlci5qcyIsIi4uL3NyYy9tYWluLmpzIl0sInNvdXJjZXNDb250ZW50IjpbImNsYXNzIFR3aXR0ZXJJbXBvcnRlciB7XG4gIGNvbnN0cnVjdG9yIChvcmlncmFwaCkge1xuICAgIHRoaXMub3JpZ3JhcGggPSBvcmlncmFwaDtcbiAgfVxufVxuZXhwb3J0IGRlZmF1bHQgVHdpdHRlckltcG9ydGVyO1xuIiwiaW1wb3J0IHBrZyBmcm9tICcuLi9wYWNrYWdlLmpzb24nO1xuaW1wb3J0IG9yaWdyYXBoIGZyb20gJ29yaWdyYXBoJztcbmltcG9ydCBUd2l0dGVySW1wb3J0ZXIgZnJvbSAnLi9Ud2l0dGVySW1wb3J0ZXIuanMnO1xuXG5jb25zdCB0d2l0dGVySW1wb3J0ZXIgPSBuZXcgVHdpdHRlckltcG9ydGVyKG9yaWdyYXBoKTtcbnR3aXR0ZXJJbXBvcnRlci52ZXJzaW9uID0gcGtnLnZlcnNpb247XG5vcmlncmFwaC5yZWdpc3RlclBsdWdpbigndHdpdHRlci1pbXBvcnQnLCB0d2l0dGVySW1wb3J0ZXIpO1xuZXhwb3J0IGRlZmF1bHQgdHdpdHRlckltcG9ydGVyO1xuIl0sIm5hbWVzIjpbIlR3aXR0ZXJJbXBvcnRlciIsImNvbnN0cnVjdG9yIiwib3JpZ3JhcGgiLCJ0d2l0dGVySW1wb3J0ZXIiLCJ2ZXJzaW9uIiwicGtnIiwicmVnaXN0ZXJQbHVnaW4iXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsTUFBTUEsZUFBTixDQUFzQjtFQUNwQkMsV0FBVyxDQUFFQyxXQUFGLEVBQVk7U0FDaEJBLFFBQUwsR0FBZ0JBLFdBQWhCOzs7OztBQ0VKLE1BQU1DLGVBQWUsR0FBRyxJQUFJSCxlQUFKLENBQW9CRSxRQUFwQixDQUF4QjtBQUNBQyxlQUFlLENBQUNDLE9BQWhCLEdBQTBCQyxHQUFHLENBQUNELE9BQTlCO0FBQ0FGLFFBQVEsQ0FBQ0ksY0FBVCxDQUF3QixnQkFBeEIsRUFBMENILGVBQTFDOzs7OyJ9
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoib3JpZ3JhcGhUd2l0dGVySW1wb3J0LmNqcy5qcyIsInNvdXJjZXMiOlsiLi4vc3JjL1R3aXR0ZXJJbXBvcnRlci5qcyIsIi4uL3NyYy9tYWluLmpzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBUd2l0dGVyIGZyb20gJ3R3aXR0ZXInO1xuXG5jbGFzcyBUd2l0dGVySW1wb3J0ZXIge1xuICBjb25zdHJ1Y3RvciAob3JpZ3JhcGgpIHtcbiAgICB0aGlzLm9yaWdyYXBoID0gb3JpZ3JhcGg7XG4gIH1cbiAgYXN5bmMgZ2V0U3RhdGljVGFibGUgKHtcbiAgICBlbmRwb2ludCxcbiAgICBtZXRob2QsXG4gICAgcGFyYW1zLFxuICAgIGNvbnN1bWVyX2tleSwgLy8gZXNsaW50LWRpc2FibGUtbGluZSBjYW1lbGNhc2VcbiAgICBjb25zdW1lcl9zZWNyZXQsIC8vIGVzbGludC1kaXNhYmxlLWxpbmUgY2FtZWxjYXNlXG4gICAgYWNjZXNzX3Rva2VuX2tleSwgLy8gZXNsaW50LWRpc2FibGUtbGluZSBjYW1lbGNhc2VcbiAgICBhY2Nlc3NfdG9rZW5fc2VjcmV0IC8vIGVzbGludC1kaXNhYmxlLWxpbmUgY2FtZWxjYXNlXG4gIH0pIHtcbiAgICBjb25zdCBjbGllbnQgPSBuZXcgVHdpdHRlcih7XG4gICAgICBjb25zdW1lcl9rZXksXG4gICAgICBjb25zdW1lcl9zZWNyZXQsXG4gICAgICBhY2Nlc3NfdG9rZW5fa2V5LFxuICAgICAgYWNjZXNzX3Rva2VuX3NlY3JldFxuICAgIH0pO1xuICAgIGNvbnN0IGRhdGEgPSBhd2FpdCBjbGllbnRbbWV0aG9kXShlbmRwb2ludCwgcGFyYW1zKTtcbiAgICByZXR1cm4gdGhpcy5vcmlncmFwaC5hZGRTdGF0aWNUYWJsZSh7XG4gICAgICBkYXRhLFxuICAgICAgbmFtZTogYFR3aXR0ZXI6ICR7ZW5kcG9pbnR9YFxuICAgIH0pO1xuICB9XG59XG5leHBvcnQgZGVmYXVsdCBUd2l0dGVySW1wb3J0ZXI7XG4iLCJpbXBvcnQgcGtnIGZyb20gJy4uL3BhY2thZ2UuanNvbic7XG5pbXBvcnQgb3JpZ3JhcGggZnJvbSAnb3JpZ3JhcGgnO1xuaW1wb3J0IFR3aXR0ZXJJbXBvcnRlciBmcm9tICcuL1R3aXR0ZXJJbXBvcnRlci5qcyc7XG5cbmNvbnN0IHR3aXR0ZXJJbXBvcnRlciA9IG5ldyBUd2l0dGVySW1wb3J0ZXIob3JpZ3JhcGgpO1xudHdpdHRlckltcG9ydGVyLnZlcnNpb24gPSBwa2cudmVyc2lvbjtcbm9yaWdyYXBoLnJlZ2lzdGVyUGx1Z2luKCd0d2l0dGVyLWltcG9ydCcsIHR3aXR0ZXJJbXBvcnRlcik7XG5leHBvcnQgZGVmYXVsdCB0d2l0dGVySW1wb3J0ZXI7XG4iXSwibmFtZXMiOlsiVHdpdHRlckltcG9ydGVyIiwiY29uc3RydWN0b3IiLCJvcmlncmFwaCIsImdldFN0YXRpY1RhYmxlIiwiZW5kcG9pbnQiLCJtZXRob2QiLCJwYXJhbXMiLCJjb25zdW1lcl9rZXkiLCJjb25zdW1lcl9zZWNyZXQiLCJhY2Nlc3NfdG9rZW5fa2V5IiwiYWNjZXNzX3Rva2VuX3NlY3JldCIsImNsaWVudCIsIlR3aXR0ZXIiLCJkYXRhIiwiYWRkU3RhdGljVGFibGUiLCJuYW1lIiwidHdpdHRlckltcG9ydGVyIiwidmVyc2lvbiIsInBrZyIsInJlZ2lzdGVyUGx1Z2luIl0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUVBLE1BQU1BLGVBQU4sQ0FBc0I7RUFDcEJDLFdBQVcsQ0FBRUMsV0FBRixFQUFZO1NBQ2hCQSxRQUFMLEdBQWdCQSxXQUFoQjs7O1FBRUlDLGNBQU4sQ0FBc0I7SUFDcEJDLFFBRG9CO0lBRXBCQyxNQUZvQjtJQUdwQkMsTUFIb0I7SUFJcEJDLFlBSm9COztJQUtwQkMsZUFMb0I7O0lBTXBCQyxnQkFOb0I7O0lBT3BCQyxtQkFQb0I7O0dBQXRCLEVBUUc7VUFDS0MsTUFBTSxHQUFHLElBQUlDLE9BQUosQ0FBWTtNQUN6QkwsWUFEeUI7TUFFekJDLGVBRnlCO01BR3pCQyxnQkFIeUI7TUFJekJDO0tBSmEsQ0FBZjtVQU1NRyxJQUFJLEdBQUcsTUFBTUYsTUFBTSxDQUFDTixNQUFELENBQU4sQ0FBZUQsUUFBZixFQUF5QkUsTUFBekIsQ0FBbkI7V0FDTyxLQUFLSixRQUFMLENBQWNZLGNBQWQsQ0FBNkI7TUFDbENELElBRGtDO01BRWxDRSxJQUFJLEVBQUcsWUFBV1gsUUFBUztLQUZ0QixDQUFQOzs7OztBQ2xCSixNQUFNWSxlQUFlLEdBQUcsSUFBSWhCLGVBQUosQ0FBb0JFLFFBQXBCLENBQXhCO0FBQ0FjLGVBQWUsQ0FBQ0MsT0FBaEIsR0FBMEJDLEdBQUcsQ0FBQ0QsT0FBOUI7QUFDQWYsUUFBUSxDQUFDaUIsY0FBVCxDQUF3QixnQkFBeEIsRUFBMENILGVBQTFDOzs7OyJ9
