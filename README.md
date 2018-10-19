@@ -10,7 +10,7 @@ Plugin to origraph.js for importing twitter data
 This will make the `window.origraph` global available to your scripts, and you can access the plugin through `window.origraph.plugins['twitter-import']`:
 ```html
 <script src="https://cdn.jsdelivr.net/npm/origraph@0.1.2/dist/origraph.umd.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/origraph-twitter-import@0.1.1/dist/origraphTwitterImport.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/origraph-twitter-import@0.1.2/dist/origraphTwitterImport.umd.js"></script>
 ```
 
 ## Server-side apps or pre-bundled browser apps
@@ -37,6 +37,18 @@ This is meant as a pretty simple template for writing other origraph data import
 - Update the contents of the `hooks` directory appropriately
 
 ## Building and Publishing
+For testing purposes, register for Twitter developer credentials, and create a `test/credentials.json` file that looks like this (this should never be committed):
+
+```json
+{
+  "consumer_key": " ... ",
+  "consumer_secret": " ... ",
+  "access_token_key": " ... ",
+  "access_token_secret": " ... "
+}
+```
+You should also add these as environment variables to Travis CI (as `TWITTER_CONSUMER_KEY`, `TWITTER_CONSUMER_SECRET`, etc).
+
 - Update the version number in `package.json`
 - `npm run build`
 - `npm run test`

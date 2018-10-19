@@ -2,7 +2,7 @@ import Twitter from 'twitter';
 import origraph from 'origraph';
 
 var name = "@origraph/twitter-import";
-var version = "0.1.1";
+var version = "0.1.2";
 var description = "Plugin to origraph.js for importing twitter data";
 var main = "dist/origraphTwitterImport.cjs.js";
 var module$1 = "dist/origraphTwitterImport.esm.js";
