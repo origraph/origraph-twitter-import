@@ -1,6 +1,6 @@
 const origraph = require('origraph');
 const origraphTwitterImport = require('../dist/origraphTwitterImport.cjs.js');
-const credentials = require('./credentials.json');
+const credentials = require('./credentials.js');
 
 describe('Import Tests', () => {
   afterAll(async () => {
