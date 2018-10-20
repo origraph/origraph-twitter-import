@@ -1,4 +1,4 @@
-import Twitter from 'twitter';
+import TwitterClient from 'twitter-node-client';
 
 class TwitterImporter {
   constructor (origraph) {
@@ -8,21 +8,27 @@ class TwitterImporter {
     endpoint,
     method,
     params,
-    consumer_key, // eslint-disable-line camelcase
-    consumer_secret, // eslint-disable-line camelcase
-    access_token_key, // eslint-disable-line camelcase
-    access_token_secret // eslint-disable-line camelcase
+    consumerKey,
+    consumerSecret,
+    accessToken,
+    accessTokenSecret,
+    callBackUrl
   }) {
-    const client = new Twitter({
-      consumer_key,
-      consumer_secret,
-      access_token_key,
-      access_token_secret
-    });
-    const data = await client[method](endpoint, params);
-    return this.origraph.addStaticTable({
-      data,
-      name: `Twitter: ${endpoint}`
+    return new Promise((resolve, reject) => {
+      const client = new TwitterClient.Twitter({
+        consumerKey,
+        consumerSecret,
+        accessToken,
+        accessTokenSecret,
+        callBackUrl
+      });
+      const functionName = method.toLowerCase() + 'CustomApiCall';
+      client[functionName](endpoint, params, reject, data => {
+        resolve(this.origraph.addStaticTable({
+          data: JSON.parse(data),
+          name: `Twitter: ${endpoint}`
+        }));
+      });
     });
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@origraph/twitter-import",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Plugin to origraph.js for importing twitter data",
   "main": "dist/origraphTwitterImport.cjs.js",
   "module": "dist/origraphTwitterImport.esm.js",
@@ -49,6 +49,6 @@
   },
   "dependencies": {
     "origraph": "^0.1.3",
-    "twitter": "^1.7.1"
+    "twitter-node-client": "0.0.6"
   }
 }

@@ -12,10 +12,11 @@ describe('Import Tests', () => {
     expect.assertions(1);
 
     const options = Object.assign({
-      endpoint: 'search/tweets',
+      endpoint: '/search/tweets.json',
       method: 'get',
       params: {
-        q: 'nasa'
+        q: 'nasa',
+        count: 2
       }
     }, credentials);
 
